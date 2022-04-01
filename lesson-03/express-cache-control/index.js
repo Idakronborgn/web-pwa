@@ -12,7 +12,7 @@ app.get("/", (req, res) => {
 	res.sendFile(path.resolve("./pages/index.html"), {
 		cacheControl: false,
 		headers: {
-			"Cache-Control": "no-store",
+			"Cache-Control": "max-age 10",
 		},
 	});
 });
@@ -30,7 +30,7 @@ app.get("/style.css", (req, res) => {
 	res.sendFile(path.resolve("./assets/style.css"), {
 		cacheControl: false,
 		headers: {
-			"Cache-Control": "no-store",
+			"Cache-Control": "immutable",
 		},
 	});
 });

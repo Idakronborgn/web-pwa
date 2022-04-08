@@ -1,3 +1,4 @@
+
 function geoFindMe() {
 
   const status = document.querySelector('#network-status');
@@ -6,13 +7,14 @@ function geoFindMe() {
   mapLink.href = '';
   mapLink.textContent = '';
 
-  function success(position) {
+  async function success(position) {
     const latitude  = position.coords.latitude;
     const longitude = position.coords.longitude;
 
     status.textContent = '';
-    mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
-    mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+    const result = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}longitude=${longitude}&localityLanguage=en`).then(res => res.json());
+    
+    mapLink.textContent = `Latitude: ${result.countryName} °, Longitude: ${result.continent} °`;
   }
 
   function error() {
